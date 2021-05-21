@@ -29,10 +29,10 @@
 %\includegraphics[width=0.424\paperwidth]{../plots/#1}
 %        }
 \newcommand{\sfigg}[2]{
-\includegraphics[width=#2]{../plots/#1}
+\includegraphics[width=#2]{plots/#1}
         }
 \newcommand{\sfiggg}[2]{
-\includegraphics[width=0.4\paperwidth]{../plots/#1}
+\includegraphics[width=0.8\paperwidth]{plots/#1}
         }
 \newcommand{\sfigr}[2]{
 \includegraphics[angle=270,origin=c,width=#2]{#1}
@@ -51,7 +51,7 @@
 }
 \newcommand{\Sfigg}[2]{
    \begin{figure}[thbp]
-    \sfigg{../plots/#1.pdf}{.8\paperwidth}
+    \sfiggg{plots/#1.pdf}{.8\paperwidth}
     \caption{{\small #2}}
     \label{fig:#1}
    \end{figure}
@@ -113,21 +113,21 @@
 
 \begin{abstract}
 \noindent This is the second paper in a series where we propose a method of indirectly measuring large scale structure using information from small scale perturbations. The idea is to build a quadratic estimator from small scale modes that provides a map of structure on large scales.
-We demonstrated in the first paper that the quadratic estimator works well on a dark-matter-only N-body simulation at a snapshot of $z=0$. Here we generalize the theory to the case of a light cone halo catalog with redshift space distortions taken into consideration. We successfully apply the generalized version of the quadratic estimator to a light cone halo catalog of an N-body simulation of size $\sim15.03\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.4$, which indicates that we might be able to apply our method to next generation galaxy surveys.
+We demonstrated in the first paper that the quadratic estimator works well on a dark-matter-only N-body simulation at a snapshot of $z=0$. Here we generalize the theory to the case of a light cone halo catalog with a non-cubic region taken into consideration. We successfully apply the generalized version of the quadratic estimator to a light cone halo catalog of an N-body simulation of size $\sim15.03\,(h^{-1}\,\rm Gpc)^3$. The most distant point in the light cone is at a redshift of $1.42$, which indicates that we might be able to apply our method to next generation galaxy surveys.
 \end{abstract}
 \maketitle
 
 \section{Introduction} \label{sec1}
-\noindent Directly measuring the distribution of matter on large scales is extremely difficult right now as pointed out, e.g., by \cite{Modi:2019hydr}. The attempt to use small scale perturbations to infer large scale information has been frequently discussed in recent years \cite{Baldauf:2011fer}\cite{Jeong:2012foss}\cite{Li:2014ssc}\cite{Zhu:2016tidal}\cite{Barreira:2017res}. In our first work \cite{Li:2020fir}, we proposed a method of indirectly measuring large scale structure using the small scale density contrast. Physically, long- and short-wavelength modes are correlated because small scale modes will grow differently depending on the large scale structure they reside in. This phenomenon leaves a signature in Fourier space: the two-point statistics of short-wavelength matter density modes will have non-zero off-diagonal terms proportional to long-wavelength modes. This is our starting point for constructing the quadratic estimator for long-wavelength modes. We tested the power of the quadratic estimator using a dark-matter-only catalog from an N-body simulation in the first paper. In this work, we generalize Ref.~\cite{Li:2020fir} to account for all three main effects that must be accounted for before applying the techniques to upcoming surveys~\cite{LSST:2012ls}\cite{Wfirst:2012jg}\cite{DESI:2019ds}: (i) we observe galaxies, not the dark matter field; (ii) we observe in a non-cubic light cone not a snapshot; and (ii) peculiar velocities lead to redshift space distortions. We should be able to apply our method to real surveys in near future.
+\noindent Directly measuring the distribution of matter on large scales is extremely difficult right now as pointed out, e.g., by \cite{Modi:2019hydr}. The attempt to use small scale perturbations to infer large scale information has been frequently discussed in recent years \cite{Baldauf:2011fer}\cite{Jeong:2012foss}\cite{Li:2014ssc}\cite{Zhu:2016tidal}\cite{Barreira:2017res}. In our first work \cite{Li:2020fir}, we proposed a method of indirectly measuring large scale structure using the small scale density contrast. Physically, long- and short-wavelength modes are correlated because small scale modes will grow differently depending on the large scale structure they reside in. This phenomenon leaves a signature in Fourier space: the two-point statistics of short-wavelength matter density modes will have non-zero off-diagonal terms proportional to long-wavelength modes. This is our starting point for constructing the quadratic estimator for long-wavelength modes. We tested the power of the quadratic estimator using a dark-matter-only catalog from an N-body simulation in the first paper. In this work, we generalize Ref.~\cite{Li:2020fir} to account for two main effects that must be accounted for before applying the techniques to upcoming surveys~\cite{LSST:2012ls}\cite{Wfirst:2012jg}\cite{DESI:2019ds}: (i) we observe galaxies, not the dark matter field; (ii) we observe in a non-cubic light cone not a snapshot. We should be able to apply our method to real surveys in near future.
 
-First we need to account for halo bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev}. Halo bias is a term relating the halo number density contrast to the matter density contrast \cite{Gil-Marin:2014sta}\cite{Gil-Marin:2016wya}. We consider up to second order bias, as done in recent treatments of galaxy surveys. Meanwhile, analytically the generalization to even higher order biases is straightforward. We assume all the bias parameter to be a constant while we are considering a large volume across wide redshift range.
+First we need to account for galaxy bias \cite{Kravtsov:1999hb}\cite{Desjacques:2018rev}. Galaxy bias is a term relating the galaxy number density contrast to the matter density contrast \cite{Gil-Marin:2014sta}\cite{Gil-Marin:2016wya}. We consider up to second order bias, as done in recent treatments of galaxy surveys. Meanwhile, analytically the generalization to even higher order biases is straightforward. We adopt the most commonly used second-order galaxy bias model and assume all the bias parameters to be a constant while we are considering a large volume across wide redshift range.
 
-Observationally a galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. The typical  treatment is to cut a light cone into several thin redshift bins \cite{Chuang:2016uuz} and analyze the properties within each bin. Doing this, though, loses information about the long-wavelength modes along line of sight. Thus in this paper we propose a method of considering all the galaxies in a light cone together, using the famous Feldman-Kaiser-Peacock (FKP) estimator \cite{Feldman:1993ky} to account for the evolution of the galaxy number density. Using an octant volume (which can be applied to a more generalized shape), we test the quadratic estimator for long-wavelength modes using information from non-zero off-diagonal terms as in Ref. \cite{Li:2020fir}.
+Observationally a galaxy catalog will be in a light cone \cite{Carroll:1997gr} instead of a snapshot. The typical  treatment is to cut a light cone into several thin redshift bins \cite{Chuang:2016uuz} and analyze the properties within each bin. Doing this, though, loses information about the long-wavelength modes along line of sight. Thus in this paper we propose a method of considering all the galaxies in a light cone together, using the famous Feldman-Kaiser-Peacock (FKP) estimator \cite{Feldman:1993ky} to account for the evolution of the galaxy number density. Using an octant volume (which can be applied to a more generalized shape), we test the quadratic estimator for long-wavelength modes using information from non-zero off-diagonal terms as in \cite{Li:2020fir}. Also notice that the FKP description corresponds to the monopole part of the estimator in redshift space (e.g. the Yamamoto estimator \cite{Yamamoto:2005dz}\cite{Bianchi:2015oia}). So our formalism is able to reconstruct the large scale monopole power spectrum which is the main goal in learning the large scale matter distributions of the 3D universe.
 
-Another observational effect we need to take into account is redshift space distortion~\cite{Kaiser:1987rsd}. This effect can be straightforwardly included by combining the Kaiser formalism with the perturbative expansion developed in real space.
+%Another observational effect we need to take into account is redshift space distortion~\cite{Kaiser:1987rsd}. This effect can be straightforwardly included by combining the Kaiser formalism with the perturbative expansion developed in real space.
 % similar formalism of perturbative series as real space's.
 
-We begin with a brief review of the formalism developed in Ref.~\cite{Li:2020fir}, then present our treatment of the galaxy number density contrast in a light cone and then build the quadratic estimator, finally adding in redshift space distortions. Finally we apply the estimator to a halo N-body simulations and successfully extract large scale modes accounting for these three effects. In table \ref{tb} we list important symbols and notation used in this work.
+We begin with a brief review of the formalism developed in Ref.~\cite{Li:2020fir}, then present our treatment of the galaxy number density contrast in a light cone and then build the quadratic estimator. Finally we apply the estimator to a light-cone halo N-body simulations and successfully extract large scale modes accounting for these effects.
 \clearpage
 
 %$\delta_{\rm h}(\vrr;a)\equiv (n_{\rm h}(\vrr;a)-\bar{n}_{\rm h}(a))/{\bar{n}_{\rm h}(a)}$
@@ -171,12 +171,12 @@ where $P_{\rm m}$ is the nonlinear matter power spectrum. With this choice of th
 where $V$ is the volume of a survey and $\Delta k$ is the width of long-wavelength mode bins. We also take advantage of the fact that $A(\vk_l;z)$ does not depend on the direction of the long mode $\vk_l$.
 
 \section{Generalization: Bias Model and FKP estimator} \label{sec3}
-Similar to \ec{tayl}, we use the Eulerian non-linear and non-local galaxy bias model np to second-order first proposed by \cite{McDonald:2009dh}:
+Similar to \ec{tayl}, we use the most commonly used Eulerian non-linear and non-local galaxy bias model np to second-order first proposed by \cite{McDonald:2009dh}:
 \bea 
 &&\delta_{\rm g}(\vec{k};z) = b_1\delta^{(1)}_m (\vec{k};z)\nonumber \\
 &+&\int \frac{d^{3}\vec{k}'}{(2\pi)^3}\delta^{(1)}_{m}(\vec{k}';z)\delta^{(1)}_{m}(\vec{k}-\vec{k}';z)\mathpzc{F}_{2}(\vec{k}',\vec{k}-\vec{k}') \;. \eql{hdc}
 \eea 
-here ``$\rm g$" denotes galaxy, and $b_{1}$ is the linear bias parameter relating galaxy and the matter density contrasts. The kernel $\mathpzc{F}_2$ is given by \cite{Gil-Marin:2014sta}:
+here ``$\rm g$" denotes galaxy, and $b_{1}$ is the linear bias parameter relating galaxy and the matter density contrasts. The kernel $\mathpzc{F}_2$ is given by:
 \be 
 \mathpzc{F}_2(\vk_1,\vk_2)=b_1F_{2}(\vk_1,\vk_2)+\frac{b_2}{2}+\frac{b_{s^2}}{2}S_{2}(\vk_1,\vk_2)
 \ee
@@ -184,8 +184,7 @@ with $S_2$ given by:
 \be 
 S_{2}(\vk_1,\vk_2)=\frac{(\vk_1\cdot \vk_2)^2}{k_1^2k_2^2}-\frac{1}{3}\;.
 \ee 
-
-In the case of a galaxy light cone survey, the actual measure quantity is the Feldman-Kaiser-Peacock (FKP) estimator $F_{2}$ \cite{Feldman:1993ky}:
+Comparing the perturbative series of the galaxy density contrast \ec{hdc} with that of the matter density contrast \ec{tayl}, we see that the difference with the first order term is an extra coefficient $b_1$. And the second order term is almost the same with a simple replacement of the kernel function. This implies that we can easily generalize to the case of a galaxy catalog in a snapshot. In the case of a galaxy catalog of a light cone, usuallyt we use the Feldman-Kaiser-Peacock (FKP) estimator to estimate the observed galaxy power spectrum \cite{Feldman:1993ky}:
 \be
 F(\vec{r})\equiv I^{-1/2}w_{\rm FKP}(\vec{r})[n_{g}(\vec{r})-\alpha n_{s}(\vec{r})]
 \ee
@@ -200,11 +199,11 @@ w_{\rm FKP}(\vec{r})=\frac{1}{1+\langle n_{g}\rangle (\vec{r})P_{0}}
 Notice in real surveys we will have other types of weights \cite{Gil-Marin:2014sta}\cite{Gil-Marin:2018cgo}, which can be easily included by the formalism in this section. The FKP estimator $F(\vec{r})$ is related to the observed galaxy power spectrum $P_{g,\rm obs}(\vec{k})$ by considering the following expectation value (diagonal elements) in Fourier space:
 \begin{eqnarray}
 \langle |F(\vec{k})|^{2}\rangle &=&\int \frac{d^{3}\vec{k}'}{(2\pi)^3}P_{g}(k';z_{\rm eff})|W(\vec{k}-\vec{k}')|^2+P_{\rm shot \; noise}\nonumber\\
-&=&\langle |\delta_{g,W}(\vec{k};z_{\rm eff})|^2 \rangle+P_{\rm shot \; noise}=P_{g,\rm obs}(\vec{k})
+&=&\langle |\delta_{g,W}(\vec{k};z_{\rm eff})|^2 \rangle+P_{\rm shot \; noise}\equiv P_{g,\rm obs}(\vec{k})
 \end{eqnarray}
 here $z_{\rm eff}$ is the effective redshift of the whole light cone. Also the window function $W(\vk)$, the shot noise spectrum $P_{\rm shot \; noise}$ and the windowed galaxy density contrast $\delta_{g,W}(\vk;z)$ are given respectively by\footnote{One interesting thing to notice here is: in the original paper of the FKP estimator \cite{Feldman:1993ky} and almost every work after, $W(\vk)$ is defined as the complex conjugate of this work. In their cases, $W(\vk)$ only shows up in the form of $|W(\vk)|^2$ so it won't make a difference. However in this work we demonstrate using simulations that it should be $e^{-i\vec{k}\cdot \vec{r}}$ instead of $e^{+i\vec{k}\cdot \vec{r}}$ in the integrand, same as the definition of the Fourier transform.}:
 \begin{eqnarray}
-W(\vec{k})&\equiv &I^{-1/2}{\int_{V} d^{3}\vec{r} \langle n_{g}\rangle(\vec{r})w_{\rm FKP}(\vec{r})e^{-i\vec{k}\cdot \vec{r}}  }\eql{WinF}\\
+W(\vec{k})&= &I^{-1/2}{\int_{V} d^{3}\vec{r} \langle n_{g}\rangle(\vec{r})w_{\rm FKP}(\vec{r})e^{-i\vec{k}\cdot \vec{r}}  }\eql{WinF}\\
 P_{\rm shot \; noise}&=&(1+\alpha)I^{-1}{\int_{V}d^{3}\vec{r} \langle n_{g}\rangle (\vec{r}) w_{\rm FKP}^{2}(\vec{r})}\\
 \delta_{g,W}(\vec{k})&\equiv& \int \frac{d^{3}\vec{k}'}{(2\pi)^3} \delta_{g}(\vec{k}')W(\vec{k}-\vec{k}')\eql{WinD}\;.
 \end{eqnarray}
@@ -235,7 +234,7 @@ by defining $\delta_{g,W}\equiv\delta_{g,W}(\vec{k}_s;z_{\rm eff})$ and $\delta_
 \eea 
 where $\delta_{\rm D}$ is the Dirac delta function. This term would vanish since in the case of a cube, $W(\vk)$ would be close to a Dirac delta function. While for a non-cubic region, this term is no longer zero. Notice that this leading order term can be fully determined numrically.
 
-Using the expressions of \ec{hdc} and \ec{WinD}, we can compute the second order two-point correlation of two short-wavelength modes $\delta_{g,W}(\vec{k}_s;z_{\rm eff})$ and $\delta_{g,W}(\vec{k}'_s;z_{\rm eff})$. Use $\langle \delta^{(1)}_{g,W}(\vec{k}_s;z_{\rm eff})\delta^{(2)}_{g,W}(\vec{k}'_s;z_{\rm eff})$ as an example:
+Using the expressions of \ec{hdc} and \ec{WinD}, we can compute the second order two-point correlation of two short-wavelength modes $\delta_{g,W}(\vec{k}_s;z_{\rm eff})$ and $\delta_{g,W}(\vec{k}'_s;z_{\rm eff})$. Use $\langle \delta^{(1)}_{g,W}(\vec{k}_s;z_{\rm eff})\delta^{(2)}_{g,W}(\vec{k}'_s;z_{\rm eff})\rangle$ as an example:
 \begin{eqnarray}
 &&\langle \delta^{(1)}_{g,W}(\vec{k}_s;z_{\rm eff})\delta^{(2)}_{g,W}(\vec{k}'_s;z_{\rm eff})\rangle\nonumber\\
 &=&b_{1}\int \frac{d^{3}\vec{k}}{(2\pi)^3}\int \frac{d^{3}\vec{k}'}{(2\pi)^3}W(\vec{k}_s-\vec{k})W(\vec{k}'_s-\vec{k}')\nonumber\\
@@ -256,7 +255,7 @@ In order to extract a term proportional to $\delta^{(1)}_{g,W}(\vec{k}_l;z_{\rm 
 \begin{eqnarray}
 \delta^{(1)}_{g,W}(\vec{k}_l;z_{\rm eff})=b_{1}\int \frac{d^{3}\vec{k}}{(2\pi)^3}\delta_{m}^{(1)}(\vec{k};z_{\rm eff})W(\vec{k}_l-\vec{k}).
 \end{eqnarray}
-We can extract $W(\vec{k}'_s-\vec{k}')$ out of the integral using the fact that, given a large enough volume, $W(\vec{k})$ is peaked at $\vec{k}=0$ and also\footnote{The result would remain the same even if the origin $\vrr=0$ is outside the region $V$.}:
+We want to extract $W(\vec{k}'_s-\vec{k}')$ out of the integral using the fact that, given a large enough volume, $W(\vec{k})$ is peaked at $\vec{k}=0$ and also\footnote{The result would remain the same even if the origin $\vrr=0$ is outside the region $V$.}:
 \begin{eqnarray}
 \int\frac{d^{3}\vec{k}}{(2\pi)^3}W(\vec{k})= W(\vrr=0)\equiv C \eql{defC}
 \end{eqnarray}
@@ -298,81 +297,89 @@ Similar to our last work, by minimizing the noise we get the expression for the 
 \end{eqnarray}
 here $P_{g,\rm obs}$ is the full observed galaxy power spectrum. With this choice of $\mathpzc{g}$ the noise term $\mathpzc{N}$ is identical to the normalization factor $\mathpzc{A}$. And the projected detectability is defined similarly as \ec{error}:
 \begin{eqnarray}
-\frac{1}{\sigma(k_l;z_{\rm eff})^2}=\frac{Vk_l^2\Delta k}{(2\pi)^2}\bigg[\frac{P_{m}^{(1)}(k_l;z_{\rm eff})}{P_{m}^{(1)}(k_l;z_{\rm eff})+\mathpzc{A}(k_l;z_{\rm eff}) }\bigg]^2
+\frac{1}{\sigma(k_l;z_{\rm eff})^2}=\frac{Vk_l^2\Delta k}{(2\pi)^2}\bigg[\frac{P_{m}^{(1)}(k_l;z_{\rm eff})}{P_{m}^{(1)}(k_l;z_{\rm eff})+\mathpzc{A}(k_l;z_{\rm eff}) }\bigg]^2 \eql{errorLC}
 \end{eqnarray}
 Using the quadratic estimator \ec{qeLC} we can use small scale information of the non-cubic whole light cone to infer the large scale field of the windowed galaxy density contrast $\delta_{g,W}(\vrr)$.
 
 \section{Demonstration with An N-Body Simulation} \label{sec4}
-\noindent We use the MICE Grand Challenge light cone N-body simulation (MICE-GC)\cite{Fosalba:2015MI}\cite{Fosalba:2015MII}\cite{Fosalba:2013mra} to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.4$ (comoving distance $3072\, h^{-1}\, \rm Mpc$) without simulation box repetition, as shown in Fig.~\rf{octant}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. 
+\noindent We use the MICE Grand Challenge light cone N-body simulation (MICE-GC) \cite{Fosalba:2015MI}\cite{Fosalba:2015MII}\cite{Fosalba:2013mra} to demonstrate the power of the estimator in a light cone. The catalog contains one octant of the full sky up to $z = 1.42$ (comoving distance $3062\, h^{-1}\, \rm Mpc$) without simulation box repetition, as shown in Fig.~\rf{octant}. This simulation used a flat $\Lambda$CDM model with cosmological parameters $ \Omega_{\rm m}=0.25$, $\sigma_8 = 0.8$, $n_{\rm s}=0.95$, $\Omega_{\rm b}=0.044$, $\Omega_{\Lambda}=0.75$, $h=0.7$. 
 
-\Sfig{octant}{The survey region of the MICE-GC simulation, which is an octant }
+\Sfig{octant}{The survey region of the MICE-GC simulation, which is an octant. Notice due to some technical reasons there are no galaxies near the origin $O$, so a small octant is removed from the survey region.}
 
-In a spectroscopic survey, the observed distribution of galaxies is distorted and squashed when we use their redshift as an indicator of their radial distance due to galaxies' peculiar velocity. In the plane-parallel approximation, the mapping from real space to redshift space is given by (e.g., see \cite{Bernardeau:2002rev}):
-\be 
-\vrr_{\rs} = \vrr + \frac{(\vec{u}\cdot \hat{n})\hat{n}}{aH(a)}
-\ee 
-where $\vrr_{\rs}$ denotes redshift space coordinates, $\vec{u}$ is the peculiar velocity field, $\hat{n}$ is the direction of the line of sight, and $H(a)$ is the Hubble parameter. As before, the galaxy density contrast in the redshift space can be written as a perturbative series \cite{Gil-Marin:2014sta}:
+We consider the halo catalog in this light cone with halo masses between $2.2\times 10^{12}h^{-1}M_{\odot}<M<10^{14}h^{-1}M_{\odot}$, which is a quite wide mass bin. We obtained similar results in other mass bins as well. The effective redshift of this light cone is $z_{\rm eff}=0.76$. We assume the bias parameter $b_{1}$ and $b_{2}$ to be free parameters of the model, and use FAST-PT \cite{McEwen:2016fjn} to determine the bias parameters to be:
 \bea 
-\delta_{g,\rs}(\vk;z)&=&\sum_{n=1}^{\infty} \int\frac{d^3 \vk_1}{(2\pi)^3} \cdots \int \frac{d^3 \vk_n}{(2\pi)^3} \delta_{\rm D}(\vk-\vk_1 - \cdots -\vk_n) \nonumber \\
-&\times & Z_n (\vk_1,\cdots,\vk_n;z)\delta_{\m}^{(1)}(\vk_1;z)\cdots \delta_{\m}^{(1)}(\vk_n;z) \eql{rspt} \vs
+b_1&=&1.88\vs
+b_2&=&3.13\,.
 \eea
-where now the window functions are
-\bea 
-Z_1(\vk;z)&=&b_{1}+f\mu^2 \\ 
-Z_2(\vk_1,\vk_2;z)&=&b_{1}\bigg[F_{2}(\vk_1,\vk_2)+\frac{f\mu k}{2}\bigg(\frac{\mu_1}{k_1}+\frac{\mu_2}{k_2}\bigg)\bigg]\vs
-&+&f\mu^2 G_2(\vk_1,\vk_2)+\frac{f^2\mu k}{2}\mu_1\mu_2 \bigg(\frac{\mu_1}{k_1}+\frac{\mu_2}{k_2}\bigg)\vs 
-&+&\frac{b_2}{2}+\frac{b_{s^2}}{2}S_{2}(\vec{k}_1,\vec{k}_2)
-\eea 
-with $\mu \equiv \vk \cdot \hat{n}/k$ and $\mu_{1,2} \equiv \vk_{1,2} \cdot \hat{n}/k_{1,2}$. Notice in real space ($\mu=\mu_1=\mu_2=0$), the second order kernel $Z_{2}$ would vanish to $\mathpzc{F}_2$ as expected. The window functions now depend on the growth rate\footnote{Notice the $f(a)$ function in this section is different from the $f$ in \ec{deff}.}
-\bea 
-f(z)&\equiv & \frac{d \ln D_{1}(z(a))}{d \ln a}\eea
-and also
-\bea
-G_2(\vk_1,\vk_2)&=&\frac{3}{7}+\frac{4}{7}\frac{(\vk_1\cdot \vk_2)^2}{k_1^2 k_2^2}+\frac{\vk_1\cdot \vk_2}{2k_1k_2}\bigg[\frac{k_1}{k_2}+\frac{k_2}{k_1}\bigg].\vs
-\eea 
-The windowed density contrast in redshift space can be formed similarly:
+The remaining bias parameter $b_{s^2}$ can be constrained by assuming the bias model is local in Lagrangian space \cite{Baldauf:2012hs}:
 \be 
-\delta_{g,{\rs},W}(\vec{k};z)=\int \frac{d^3\vec{k}'}{(2\pi)^3}\delta_{g,{\rs}}(\vec{k}';z)W_{\rs}(\vec{k}-\vec{k}')
+b_{s^2}=-\frac{4}{7}(b_1-1)=-0.50\,.
 \ee 
-here $W_{\rs}$ is the Fourier transform of the survey region in redshift space. \textbf{It this necessary?} Again the leading order term of the two-point function would be:
-\bea 
-&&\langle \delta^{(1)}_{g,{\rs},W}(\vec{k}_s;z)\delta^{(1)}_{g,{\rs},W}(\vec{k}'_s;z)\rangle|_{\vec{k}_s+\vec{k}'_s=\vec{k}_l} \vs
-&=&(b_1+f(z)\mu_s^2)(b_1+f(z)\mu_s^2)\vs
-&\times &\int \frac{d^3\vec{k}}{(2\pi)^3}W_{\rs}(\vk-\vk_s)W_{\rs}(-\vk-\vk'_s)P_m^{(1)}(k;z)
-\eea 
-And we can evaluate the second leading order term as:
-\bea 
-&&\langle \delta^{(1)}_{g,{\rs},W}(\vec{k}_s;z)\delta^{(2)}_{g,{\rs},W}(\vec{k}'_s;z)\rangle|_{\vec{k}_s+\vec{k}'_s=\vec{k}_l}\vs
-&=&\int \frac{d^{3}\vec{k}}{(2\pi)^3}\int \frac{d^{3}\vec{k}'}{(2\pi)^3}W_{\rs}(\vec{k}_s-\vec{k})W_{\rs}(\vec{k}'_s-\vec{k}')Z_{1}(\vk;z)\nonumber\\
-&\times & \langle \delta^{(1)}_{m}(\vec{k};z)\delta^{(2)}_{g}(\vec{k}';z)\rangle\vs
-&=&\int \frac{d^{3}\vec{k}}{(2\pi)^3}\int \frac{d^{3}\vec{k}'}{(2\pi)^3}W_{\rs}(\vec{k}_s-\vec{k})W_{\rs}(\vec{k}'_s-\vec{k}')Z_{1}(\vk;z)\nonumber\\
-&\times &Z_{2}(-\vec{k},\vec{k}+\vec{k}';z)P_{m}^{(1)}(k;z)\delta_{m}^{(1)}(\vec{k}+\vec{k}';z)
-\eea 
-Similarly after extracting the term $W_{\rs}(\vec{k}'_s-\vec{k}')$ out of the integral, we can recover the windowed long mode $\delta^{(1)}_{g,{\rs},W}(\vec{k}_l;z)$ from the bracket above:
-\bea 
-&&\langle \delta^{(1)}_{g,{\rs},W}(\vec{k}_s;z)\delta^{(2)}_{g,{\rs},W}(\vec{k}'_s;z)\rangle|_{\vec{k}_s+\vec{k}'_s=\vec{k}_l}\vs
-&=&2Z_2(-\vec{k}_s,\vec{k}_s+\vec{k}'_s;z)P_{m}^{(1)}(k_s;z)\delta^{(1)}_{g,{\rs},W}(\vec{k}_l;z) 
-\eea
-Thus the quadratic estimator and its projected detectability can be expressed similarly as last section \ref{sec3}, with $Z_2$ replaced by $\mathpzc{F}_2$. We will not it repeat here.
+We use the quadratic estimator \ec{qeLC} to get the reconstructed windowed galaxy density field and transform them back into real space. Then compare this estimated result with the directly measured FKP estimator in real space in Fig.~\rf{}. \textbf{We use the information of small scale modes up to $k_{s,\rm max}=0.48\,h\,\rm Mpc^{-1}$. Since we observe that the result would get much better if we include more small scale modes.} We also plot in Fig.~\rf{SN} the directly measured large scale halo power spectrum with the cosmic variance versus the estimated large scale power spectrum using \ec{qeLC} with detectability given by \ec{errorLC}. We see that our quadratic estimator gives a good estimation of the linear matter power spectrum and the variance of the estimation is only slightly larger than the cosmic variance.
 
-\section{Demonstration with N-Body Simulation}
+ Notice in Fig.~\rf{} we cannot have a direct measurement of the $\delta_{g,W}$ field, but both of them encode almost the same large scale information of the light cone catalog. Since the large scale we are observing is about $10^{-3}h\,\rm Mpc^{-1}$$<k_l<10^{-2}h\,\rm Mpc^{-1}$ where the magnitude of the observed power spectrum Fig.~\rf{SN} is much greater than the shot noise term where in this case $P_{\rm shot \; noise}\simeq 1000\,(h^{-1}\rm Mpc)^3$. From Fig.~\rf{} we see that our quadratic estimator is still able to extract large scale information, especially large over- and under-density cells are well reconstructed. The difference seems slightly larger when we go to higher redshift (corresponding to the panels on the right) and is worst on the very right panel.
+ 
+\Sfig{real_fkp}{Comparison of the true real space FKP estimator field in the MICE-GC simulation ($F(\vec{r})$ computed using the directly measured large scale modes, top row) and the windowed halo density field from the quadratic estimator ($\hat{\delta}_{h,W}(\vec{r})$, middle row). The bottom row shows their difference. Each cell is ($0.44\,h^{-1}\rm Mpc$) thick. And the upper limit of $\vec{k}_s$ is $0.48\,h\,\rm Mpc^{-1}$.}
+
+\Sfig{SN}{Inferred linear matter power spectrum from direct measurement versus indirect estimation using our quadratic estimator, both from the MICE-GC light-cone halo catalog. The error for the direct measurement can be derived from the cosmic variance. And the error for the indirect estimation can be expressed as $P_{m}^{(1)}(k_l)\sigma(k_l)$, where $\sigma(k_l)$ is from \ec{errorLC} after scaling.}
+
+%In a spectroscopic survey, the observed distribution of galaxies is distorted and squashed when we use their redshift as an indicator of their radial distance due to galaxies' peculiar velocity. In the plane-parallel approximation, the mapping from real space to redshift space is given by (e.g., see \cite{Bernardeau:2002rev}):
+%\be 
+%\vrr_{\rs} = \vrr + \frac{(\vec{u}\cdot \hat{n})\hat{n}}{aH(a)}
+%\ee 
+%where $\vrr_{\rs}$ denotes redshift space coordinates, $\vec{u}$ is the peculiar velocity field, $\hat{n}$ is the direction of the line of sight, and $H(a)$ is the Hubble parameter. As before, the galaxy density contrast in the redshift space can be written as a perturbative series \cite{Gil-Marin:2014sta}:
+%\bea 
+%\delta_{g,\rs}(\vk;z)&=&\sum_{n=1}^{\infty} \int\frac{d^3 \vk_1}{(2\pi)^3} \cdots \int \frac{d^3 \vk_n}{(2\pi)^3} \delta_{\rm D}(\vk-\vk_1 - \cdots -\vk_n) \nonumber \\
+%&\times & Z_n (\vk_1,\cdots,\vk_n;z)\delta_{\m}^{(1)}(\vk_1;z)\cdots \delta_{\m}^{(1)}(\vk_n;z) \eql{rspt} \vs
+%\eea
+%where now the window functions are
+%\bea 
+%Z_1(\vk;z)&=&b_{1}+f\mu^2 \\ 
+%Z_2(\vk_1,\vk_2;z)&=&b_{1}\bigg[F_{2}(\vk_1,\vk_2)+\frac{f\mu k}{2}\bigg(\frac{\mu_1}{k_1}+\frac{\mu_2}{k_2}\bigg)\bigg]\vs
+%&+&f\mu^2 G_2(\vk_1,\vk_2)+\frac{f^2\mu k}{2}\mu_1\mu_2 \bigg(\frac{\mu_1}{k_1}+\frac{\mu_2}{k_2}\bigg)\vs 
+%&+&\frac{b_2}{2}+\frac{b_{s^2}}{2}S_{2}(\vec{k}_1,\vec{k}_2)
+%\eea 
+%with $\mu \equiv \vk \cdot \hat{n}/k$ and $\mu_{1,2} \equiv \vk_{1,2} \cdot \hat{n}/k_{1,2}$. Notice in real space ($\mu=\mu_1=\mu_2=0$), the second order kernel $Z_{2}$ would vanish to $\mathpzc{F}_2$ as expected. The window functions now depend on the growth rate\footnote{Notice the $f(a)$ function in this section is different from the $f$ in \ec{deff}.}
+%\bea 
+%f(z)&\equiv & \frac{d \ln D_{1}(z(a))}{d \ln a}\eea
+%and also
+%\bea
+%G_2(\vk_1,\vk_2)&=&\frac{3}{7}+\frac{4}{7}\frac{(\vk_1\cdot \vk_2)^2}{k_1^2 k_2^2}+\frac{\vk_1\cdot \vk_2}{2k_1k_2}\bigg[\frac{k_1}{k_2}+\frac{k_2}{k_1}\bigg].\vs
+%\eea 
+%The windowed density contrast in redshift space can be formed similarly:
+%\be 
+%\delta_{g,{\rs},W}(\vec{k};z)=\int \frac{d^3\vec{k}'}{(2\pi)^3}\delta_{g,{\rs}}(\vec{k}';z)W_{\rs}(\vec{k}-\vec{k}')
+%\ee 
+%here $W_{\rs}$ is the Fourier transform of the survey region in redshift space. \textbf{It this necessary?} Again the leading order term of the two-point function would be:
+%\bea 
+%&&\langle \delta^{(1)}_{g,{\rs},W}(\vec{k}_s;z)\delta^{(1)}_{g,{\rs},W}(\vec{k}'_s;z)\rangle|_{\vec{k}_s+\vec{k}'_s=\vec{k}_l} \vs
+%&=&(b_1+f(z)\mu_s^2)(b_1+f(z)\mu_s^2)\vs
+%&\times &\int \frac{d^3\vec{k}}{(2\pi)^3}W_{\rs}(\vk-\vk_s)W_{\rs}(-\vk-\vk'_s)P_m^{(1)}(k;z)
+%\eea 
+%And we can evaluate the second leading order term as:
+%\bea 
+%&&\langle \delta^{(1)}_{g,{\rs},W}(\vec{k}_s;z)\delta^{(2)}_{g,{\rs},W}(\vec{k}'_s;z)\rangle|_{\vec{k}_s+\vec{k}'_s=\vec{k}_l}\vs
+%&=&\int \frac{d^{3}\vec{k}}{(2\pi)^3}\int \frac{d^{3}\vec{k}'}{(2\pi)^3}W_{\rs}(\vec{k}_s-\vec{k})W_{\rs}(\vec{k}'_s-\vec{k}')Z_{1}(\vk;z)\nonumber\\
+%&\times & \langle \delta^{(1)}_{m}(\vec{k};z)\delta^{(2)}_{g}(\vec{k}';z)\rangle\vs
+%&=&\int \frac{d^{3}\vec{k}}{(2\pi)^3}\int \frac{d^{3}\vec{k}'}{(2\pi)^3}W_{\rs}(\vec{k}_s-\vec{k})W_{\rs}(\vec{k}'_s-\vec{k}')Z_{1}(\vk;z)\nonumber\\
+%&\times &Z_{2}(-\vec{k},\vec{k}+\vec{k}';z)P_{m}^{(1)}(k;z)\delta_{m}^{(1)}(\vec{k}+\vec{k}';z)
+%\eea 
+%Similarly after extracting the term $W_{\rs}(\vec{k}'_s-\vec{k}')$ out of the integral, we can recover the windowed long mode $\delta^{(1)}_{g,{\rs},W}(\vec{k}_l;z)$ from the bracket above:
+%\bea 
+%&&\langle \delta^{(1)}_{g,{\rs},W}(\vec{k}_s;z)\delta^{(2)}_{g,{\rs},W}(\vec{k}'_s;z)\rangle|_{\vec{k}_s+\vec{k}'_s=\vec{k}_l}\vs
+%&=&2Z_2(-\vec{k}_s,\vec{k}_s+\vec{k}'_s;z)P_{m}^{(1)}(k_s;z)\delta^{(1)}_{g,{\rs},W}(\vec{k}_l;z) 
+%\eea
+%Thus the quadratic estimator and its projected detectability can be expressed similarly as last section \ref{sec3}, with $Z_2$ replaced by $\mathpzc{F}_2$. We will not it repeat here.
 
 
-\section{Conclusion} \label{sec6}
+\section{Conclusion} \label{sec5}
 \subsection{Summary}
-In prior work \cite{Li:2020fir} we have shown that the amplitude and phase of large scale density fluctuations can be recovered by applying a quadratic estimator to measurements of small scale Fourier modes and their correlations. In this paper we extend that work (which was limited to a matter density field at a single instance in cosmic time) in the following three ways in order to make it applicable to observational data. All extensions are tested on appropriate mock survey datasets derived from N-body simulations.
+In prior work \cite{Li:2020fir} we have shown that the amplitude and phase of large scale density fluctuations can be recovered by applying a quadratic estimator to measurements of small scale Fourier modes and their correlations. In this paper we extend that work (which was limited to a matter density field at a single instance in cosmic time) to a light cone galaxy catalog in order to make it applicable to observational data. All extensions are tested on appropriate mock survey datasets derived from N-body simulations.\
 
-\begin{enumerate}
-\item  Window function. We allow for the effect of non-cubic shape of the survey by including the window function $W(\vrr)$.
-
-\item Light cone effect. The redshift difference between parts of large volume surveys can be considerable. We prove that using a suitable weighting involving the linear growth factor, the quadratic estimator can correctly recover large scale modes from small wavelength modes measured on the light cone.
-
-\item Redshift space distortions. We prove that the relevant relationship between small and large scale modes applies in redshift space, and show how redshift space distortions can be included in our formalism.
-\end{enumerate}
  
 \subsection{Discussion}
 
-Our formalism includes the major effects that are relevant for an application to observational data. There are some minor aspects however which will need to be dealt with when this occurs. One is the fact that we have tested on homogeneous mock surveys, when real observations will include masked data (to account for bright stars for example), and a potentially complex window function. We have also used a cubical volume excised from the full light cone in our mock surveys in order to compute Fourier space clustering. This simplification means that a significant quantity of data is not used for analysis. It will therefore be useful to develop an approach to account for the effect of convolution with the window function in Fourier space. Because we are concerned with the direct measurement of small scale modes this should not be such a large effect, particularly for surveys with significant sky coverage.
+Our formalism includes the major effects that are relevant for an application to observational data. There are some minor aspects however which will need to be dealt with when this occurs. One is the fact that we have tested on homogeneous mock surveys, when real observations will include masked data (to account for bright stars for example), and a potentially more complex window function. In a spectroscopic survey, the observed distribution of galaxies is distorted and squashed when we use their redshift as an indicator of their radial distance due to galaxies' peculiar velocity. This effect is known as redshift space distortion \cite{Kaiser:1987rsd} and the FKP formalism corresponds to the monopole moment in redshift space. And we left the generalization to include higher order power spectrum multipoles (quadrapole, hexadecapole) to future work.
 
 At present the large scale limitations on direct measurement of clustering are observational systematics (e.g., \cite{Ho:2012sh}). These include angular variations in obscuration, seeing, sky brightness, colors, extinction and magnitude errors. Because these result in relatively small modulations of the measured galaxy density, they will affect large scale modes most importantly, hence the utility of our indirect measurements of clustering on these scales. Quantification of these effects on the scales for which we do measure clustering will still be needed though. It will be also be instructive to apply large scale low amplitude modulations to our mock surveys in order to test how well the quadratic estimator works with imperfect data. Even small scale issues with clustering, such as fiber collisions \cite{Hahn:2016kiy} could affect our reconstruction, depending on how their effects propagate through the quadratic estimator.
 
@@ -384,83 +391,82 @@ Once an indirect measurement of large scale modes has been made from an observat
 
 First, because of the effect of observational systematics mentioned above, and the fact the our indirect estimate of clustering is sensitive to fluctuations beyond the survey boundaries itself, then it is likely that the measurement we propose would correspond to the largest scale estimate of three dimensional matter clustering yet made. This would in itself be an exciting test of theories, for example probing the power spectrum beyond the matter-radiation equality turnover, and allowing access to the Harrison-Zeldovich portion. There has been much work analyzing large scale anomalies in the clustering measured from the CMB \cite{Copi:2010na}\cite{Rassat:2014yna}\cite{Schwarz:2015cma}, and it would be extremely useful to see if anything comparable is seen from galaxy large scale structure data. On smaller scales, one could use the matter-radiation equality turnover as a cosmic ruler \cite{Hasenkamp:2012ii}, and this would allow comparison to measurements based on BAO \cite{Lazkoz:2007cc}.
 
-Second, there will be much information in the reconstructed maps of the large scale densities (such as Fig.~\rf{real_halo}). One could look at statistics beyond the power spectrum, such as counts-in-cells \cite{Yang:2011cic}, or the bispectrum, and see how consistent they are with model expectations. One can also compare to the directly measured density field and obtain information on the large scale systematic effects which are modulating the latter. Cross-correlation of the maps with those of different tracers can also be carried out. For example the large scale potential field inferred can be used in conjunction with CMB observations to constrain the Integrated Sachs Wolfe effect\cite{Nishizawa:2014vga}.
+Second, there will be much information in the reconstructed maps of the large scale densities (such as Fig.~\rf{real_fkp}). One could look at statistics beyond the power spectrum, such as counts-in-cells \cite{Yang:2011cic}, or the bispectrum, and see how consistent they are with model expectations. One can also compare to the directly measured density field and obtain information on the large scale systematic effects which are modulating the latter. Cross-correlation of the maps with those of different tracers can also be carried out. For example the large scale potential field inferred can be used in conjunction with CMB observations to constrain the Integrated Sachs Wolfe effect\cite{Nishizawa:2014vga}.
 
 In general, as we will be looking at large scale fluctuations beyond current limits by perhaps an order of magnitude in scale or more, one may expect to find interesting constraints on new physics. For example evidence for the $\Lambda$CDM model was seen in the first reliable measurements of large scale galaxy clustering on scales greater than $10\,h^{-1}\rm Mpc$ (e.g., \cite{Efstathio:1990cdm}). Moving to wavelengths beyond $2\pi/(k=0.02) \sim 300 \rm \, Mpc$ may yet lead to more surprises.
 
 \acknowledgements
-We thank Duncan Campbell and Rachel Mandelbaum for resourceful discussions. We also thank Enrique Gaztanaga for providing us with the $1$ in $700$ matter particles' positions of Mice-GC simulation. This work is supported by U.S. Dept. of Energy contract DE-SC0019248 and NSF AST-1909193.
-The BigMDPL simulation was performed at LRZ Munich within the PRACE project pr86bu. The CosmoSim database (\url{www.cosmosim.org}) providing the file access is a service by the Leibniz-Institute for Astrophysics Potsdam (AIP).
+We thank Duncan Campbell and Rachel Mandelbaum for resourceful discussions. We also thank Enrique Gaztanaga for providing us with the $1$ in $700$ matter particles' positions of Mice-GC simulation for a test. This work is supported by U.S. Dept. of Energy contract DE-SC0019248 and NSF AST-1909193.
 This work has made use of CosmoHub. CosmoHub has been developed by the Port d'Informació Científica (PIC), maintained through a collaboration of the Institut de Física d'Altes Energies (IFAE) and the Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas (CIEMAT), and was partially funded by the ``Plan Estatal de Investigación Científica y Técnica y de Innovación" program of the Spanish government.
 \clearpage
 
-\appendix 
-
-
-\noindent 
-\section{Approximation used in \ec{apr}}\label{appenda}
-In Fig.~\rf{approx} we use a simple 1D example to demonstrate that the approximation we made in \ec{apr} is valid:
-\be 
-\int_{V} d^{3}\vrr\, 'e^{-i\vec{q}\cdot \vrr\, '}{D_{1}(a(r'))}  \simeq D_{1}(a=1)\,(2\pi)^3\delta_{\rm D}(\vec{q})
-\ee 
-This 1D result can be also be applied to 3D the spherical part of the integration will simply result in a 2D Dirac delta function.
-
-The blue curve corresponds to the Dirac delta function in a finite volume multiplied by $D_{1}(a=1)$ (right-hand-side of the above equation), and the orange curve is the left-hand-side. We can see that the orange curve is still sharply peaked at $q=0$. 
-
-For a relatively large scale, e.g., $L=3072\, h^{-1}\rm Mpc$, we have $\Delta k=2\pi/L\approx 0.002 \, h \, \rm Mpc^{-1}$. Generally we want to further evaluate the following integral:
-\be
-\int \frac{d^{3}\vec{q}}{(2\pi)^3}f(\vec{q}) \int_{V} d^{3}\vrr\, 'e^{-i\vec{q}\cdot \vrr\, '}{D_{1}(a(r'))}
-\ee 
-Unless $f(\vec{q})$ is a rapidly fluctuating function at scales $q \approx 0.002$, \ec{dt} remains a good approximation. Recall that $f(\vec{q})$ in our case is a combination of $F_{2}$ and $\delta_{\rm m}$, it is slowly varying compared to the scale $q \approx 0.002$. So it is a convincing approximation based on our analysis.
-
-\Sfig{approx}{1D demonstration of the approximation made in \ec{dt}. Here $\Delta k=2\pi /L$.}
-
-\section{Proof of \ec{2ptddrs} in Redshift Space} \label{appendb}
-One can prove that the leading order term of $d_{{\rm m,rs},V}(\vk)$ still characterizes the linear matter power spectrum in redshift space. Similar to \ec{dfo}, we have:
-\bea
-d^{( 1)}_{{\rm m,rs},V}(\vk)&\simeq & Z_{1}(\vk;a=1)\delta^{(1)}_{{\rm m,ini},V}(\vk)\vs
-&=&(1+f(a=1)\mu^2)\delta^{(1)}_{{\rm m,ini},V}(\vk).\eql{rs1}
-\eea
-where again we use the following approximation:
-\be 
-\int_{V} d^{3}\vrr\, e^{-i\vec{q}\cdot\vrr}f(a(r))  \simeq f(a=1)\,(2\pi)^3\delta_{\rm D}(\vec{q})
-\ee 
-Further:
-\bea 
-&&\langle d^{( 1)}_{{\rm m,rs},V}(\vk) d^{(1)}_{{\rm m,rs},V}(\vk') \rangle\vs
-& \simeq&(2\pi)^3 \delta_{\rm D}(\vk+\vk')(1+f(a=1)\mu^2)^2 P_{\rm m,ini}(k)\vs
-&= &(2\pi)^3 \delta_{\rm D}(\vk+\vk')\bigg[ \frac{D_{\ini}}{D_1(a=1)}\bigg]^2 P_{\rm m,lin,rs}(\vk;a=1)\vs \eql{lpsrs}
-\eea 
-where 
-\be 
-P_{\rm m,lin,rs}(\vk;a)=(1+f(a)\mu^2)^2 P_{\rm m,lin}(k;a) \eql{kaiser}
-\ee 
-is the leading order redshift space matter power spectrum first derived by N. Kaiser \cite{Kaiser:1987rsd}. We can decompose its direction-dependence by Legendre polynomials expansion as:
-\be 
-P_{\rm m,lin,rs,\ell}(k;a)\equiv \frac{2\ell+1}{2}\int_{-1}^{1}d\mu P_{\rm m,lin,rs}(\vk;a) \mathcal{L}_{\ell}(\mu)
-\ee 
-The monopole ($\ell=0$) and the quadrupole ($\ell=2$) moments have been measured in recent surveys \cite{Gil-Marin:2015sqa}. Now we start our proof of \ec{2ptddrs}, first we have:
-\bea 
-&&\langle \dmi^{(1)}(\vk)\delta_{\rm m,\rs}^{(2)}(\vk';a(r'))\rangle\vs 
-&=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}Z_{2}(-\vk,\vk+\vk';a(r')) \vs
-& &\times P_{\rm m,\ini}(k)\dmi^{(1)}(\vk+\vk').\vs
-\eea 
-This is a simple generalization of \ec{odb} with $F_2$ replaced by $Z_2$. When we evaluate $\langle d_{\rm m,\rs}^{(1)}(\vk_s) d_{\rm m,\rs}^{(2)}(\vk'_s)\rangle$ we get an expression close to \ec{appr}:
-\bea 
-&& \langle d^{(1)}_{\rm m,\rs}(\vk_s)d^{(2)}_{\rm m,\rs}(\vk_s') \rangle \vs 
-&=&  Z_{1}(\vk_s;a=1)\langle \dmi^{(1)}(\vk_s)d^{(2)}_{\rm m,\rs}(\vk_s') \rangle\vs
-&\simeq &2Z_{1}(\vk_s;a=1)\int {d^{3}\vk'}\delta_{\rm D}(\vk'-\vk_s') \vs
-&&\times Z_{2}(-\vk_s,\vk_s+\vk';a=1)P_{\rm m,\ini}(k_s)\dmi^{(1)}(\vk_s+\vk') \vs
-&\simeq & \frac{Z_{1}(\vk_s;a=1 )}{Z_{1}(\vk_s+\vk_s';a=1)} \vs 
-&&\times2\,Z_{2}(-\vk_s,\vk_s+\vk_s';a=1) P_{\rm m,\ini}(k_s)d_{\rm m,rs}^{(1)}(\vk_s+\vk_s') \vs\eql{apprrs}
-\eea 
-In the last step we use \ec{rs1} to recover the first order term of $d_{\rm m,rs}^{(1)}$, and with this step we have completed the proof of \ec{2ptddrs}.
-
-Another interesting thing to notice in the redshift space construction is that, the Gaussian noise term $\mathpzc{A}_{\rs}$ is direction-dependent following:
-\be 
-\mathpzc{A}_{\rs}(\vk_l)\propto(1+f(a=1)\mu_{\vk_l}^{2})
-\ee 
-One benefit we can take from this numerical result is that the projected detectability in redshift space still will not depend on the direction of $\vk_l$, and so the error bars will be the same for both real space and redshift space.
+%\appendix 
+%
+%
+%\noindent 
+%\section{Approximation used in \ec{apr}}\label{appenda}
+%In Fig.~\rf{approx} we use a simple 1D example to demonstrate that the approximation we made in \ec{apr} is valid:
+%\be 
+%\int_{V} d^{3}\vrr\, 'e^{-i\vec{q}\cdot \vrr\, '}{D_{1}(a(r'))}  \simeq D_{1}(a=1)\,(2\pi)^3\delta_{\rm D}(\vec{q})
+%\ee 
+%This 1D result can be also be applied to 3D the spherical part of the integration will simply result in a 2D Dirac delta function.
+%
+%The blue curve corresponds to the Dirac delta function in a finite volume multiplied by $D_{1}(a=1)$ (right-hand-side of the above equation), and the orange curve is the left-hand-side. We can see that the orange curve is still sharply peaked at $q=0$. 
+%
+%For a relatively large scale, e.g., $L=3062\, h^{-1}\rm Mpc$, we have $\Delta k=2\pi/L\approx 0.002 \, h \, \rm Mpc^{-1}$. Generally we want to further evaluate the following integral:
+%\be
+%\int \frac{d^{3}\vec{q}}{(2\pi)^3}f(\vec{q}) \int_{V} d^{3}\vrr\, 'e^{-i\vec{q}\cdot \vrr\, '}{D_{1}(a(r'))}
+%\ee 
+%Unless $f(\vec{q})$ is a rapidly fluctuating function at scales $q \approx 0.002$, \ec{dt} remains a good approximation. Recall that $f(\vec{q})$ in our case is a combination of $F_{2}$ and $\delta_{\rm m}$, it is slowly varying compared to the scale $q \approx 0.002$. So it is a convincing approximation based on our analysis.
+%
+%\Sfig{approx}{1D demonstration of the approximation made in \ec{dt}. Here $\Delta k=2\pi /L$.}
+%
+%\section{Proof of \ec{2ptddrs} in Redshift Space} \label{appendb}
+%One can prove that the leading order term of $d_{{\rm m,rs},V}(\vk)$ still characterizes the linear matter power spectrum in redshift space. Similar to \ec{dfo}, we have:
+%\bea
+%d^{( 1)}_{{\rm m,rs},V}(\vk)&\simeq & Z_{1}(\vk;a=1)\delta^{(1)}_{{\rm m,ini},V}(\vk)\vs
+%&=&(1+f(a=1)\mu^2)\delta^{(1)}_{{\rm m,ini},V}(\vk).\eql{rs1}
+%\eea
+%where again we use the following approximation:
+%\be 
+%\int_{V} d^{3}\vrr\, e^{-i\vec{q}\cdot\vrr}f(a(r))  \simeq f(a=1)\,(2\pi)^3\delta_{\rm D}(\vec{q})
+%\ee 
+%Further:
+%\bea 
+%&&\langle d^{( 1)}_{{\rm m,rs},V}(\vk) d^{(1)}_{{\rm m,rs},V}(\vk') \rangle\vs
+%& \simeq&(2\pi)^3 \delta_{\rm D}(\vk+\vk')(1+f(a=1)\mu^2)^2 P_{\rm m,ini}(k)\vs
+%&= &(2\pi)^3 \delta_{\rm D}(\vk+\vk')\bigg[ \frac{D_{\ini}}{D_1(a=1)}\bigg]^2 P_{\rm m,lin,rs}(\vk;a=1)\vs \eql{lpsrs}
+%\eea 
+%where 
+%\be 
+%P_{\rm m,lin,rs}(\vk;a)=(1+f(a)\mu^2)^2 P_{\rm m,lin}(k;a) \eql{kaiser}
+%\ee 
+%is the leading order redshift space matter power spectrum first derived by N. Kaiser \cite{Kaiser:1987rsd}. We can decompose its direction-dependence by Legendre polynomials expansion as:
+%\be 
+%P_{\rm m,lin,rs,\ell}(k;a)\equiv \frac{2\ell+1}{2}\int_{-1}^{1}d\mu P_{\rm m,lin,rs}(\vk;a) \mathcal{L}_{\ell}(\mu)
+%\ee 
+%The monopole ($\ell=0$) and the quadrupole ($\ell=2$) moments have been measured in recent surveys \cite{Gil-Marin:2015sqa}. Now we start our proof of \ec{2ptddrs}, first we have:
+%\bea 
+%&&\langle \dmi^{(1)}(\vk)\delta_{\rm m,\rs}^{(2)}(\vk';a(r'))\rangle\vs 
+%&=&2\bigg[\frac{D_{1}(a(r'))}{D_{\ini}} \bigg]^{2}Z_{2}(-\vk,\vk+\vk';a(r')) \vs
+%& &\times P_{\rm m,\ini}(k)\dmi^{(1)}(\vk+\vk').\vs
+%\eea 
+%This is a simple generalization of \ec{odb} with $F_2$ replaced by $Z_2$. When we evaluate $\langle d_{\rm m,\rs}^{(1)}(\vk_s) d_{\rm m,\rs}^{(2)}(\vk'_s)\rangle$ we get an expression close to \ec{appr}:
+%\bea 
+%&& \langle d^{(1)}_{\rm m,\rs}(\vk_s)d^{(2)}_{\rm m,\rs}(\vk_s') \rangle \vs 
+%&=&  Z_{1}(\vk_s;a=1)\langle \dmi^{(1)}(\vk_s)d^{(2)}_{\rm m,\rs}(\vk_s') \rangle\vs
+%&\simeq &2Z_{1}(\vk_s;a=1)\int {d^{3}\vk'}\delta_{\rm D}(\vk'-\vk_s') \vs
+%&&\times Z_{2}(-\vk_s,\vk_s+\vk';a=1)P_{\rm m,\ini}(k_s)\dmi^{(1)}(\vk_s+\vk') \vs
+%&\simeq & \frac{Z_{1}(\vk_s;a=1 )}{Z_{1}(\vk_s+\vk_s';a=1)} \vs 
+%&&\times2\,Z_{2}(-\vk_s,\vk_s+\vk_s';a=1) P_{\rm m,\ini}(k_s)d_{\rm m,rs}^{(1)}(\vk_s+\vk_s') \vs\eql{apprrs}
+%\eea 
+%In the last step we use \ec{rs1} to recover the first order term of $d_{\rm m,rs}^{(1)}$, and with this step we have completed the proof of \ec{2ptddrs}.
+%
+%Another interesting thing to notice in the redshift space construction is that, the Gaussian noise term $\mathpzc{A}_{\rs}$ is direction-dependent following:
+%\be 
+%\mathpzc{A}_{\rs}(\vk_l)\propto(1+f(a=1)\mu_{\vk_l}^{2})
+%\ee 
+%One benefit we can take from this numerical result is that the projected detectability in redshift space still will not depend on the direction of $\vk_l$, and so the error bars will be the same for both real space and redshift space.
 
 
 
